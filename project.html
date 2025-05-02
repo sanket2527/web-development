@@ -1,0 +1,134 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Weather Forecast</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to top, #a1c4fd, #c2e9fb);
+      color: #333;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background-color: #1976d2;
+      color: white;
+      padding: 1rem 0;
+    }
+    .container {
+      padding: 2rem;
+    }
+    .buttons {
+      margin: 1rem 0;
+    }
+    button {
+      background-color: #1976d2;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      margin: 0 5px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    button:hover {
+      background-color: #145ea8;
+    }
+    .forecast {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+    .day {
+      background-color: white;
+      padding: 1rem;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    .temp {
+      font-size: 2em;
+      color: #1976d2;
+    }
+    .footer {
+      margin-top: 3rem;
+      padding: 1rem;
+      background-color: #1976d2;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Weather Forecast</h1>
+    <p>Click a city to view its 5-day forecast</p>
+  </header>
+
+  <div class="container">
+    <div class="buttons">
+      <button onclick="updateWeather('Sampletown')">Sampletown</button>
+      <button onclick="updateWeather('Newville')">Newville</button>
+      <button onclick="updateWeather('Oldport')">Oldport</button>
+    </div>
+
+    <h2 id="city-name">City: Sampletown</h2>
+
+    <div class="forecast" id="forecast">
+      <!-- Forecast cards will be inserted here -->
+    </div>
+  </div>
+
+  <div class="footer">
+    <p>&copy; 2025 Weather Forecast Project</p>
+  </div>
+
+  <script>
+    const weatherData = {
+      Sampletown: [
+        { day: "Monday", temp: "25°C", desc: "Sunny" },
+        { day: "Tuesday", temp: "22°C", desc: "Cloudy" },
+        { day: "Wednesday", temp: "28°C", desc: "Sunny" },
+        { day: "Thursday", temp: "20°C", desc: "Rainy" },
+        { day: "Friday", temp: "24°C", desc: "Partly Cloudy" }
+      ],
+      Newville: [
+        { day: "Monday", temp: "30°C", desc: "Hot" },
+        { day: "Tuesday", temp: "29°C", desc: "Sunny" },
+        { day: "Wednesday", temp: "31°C", desc: "Hot" },
+        { day: "Thursday", temp: "28°C", desc: "Clear" },
+        { day: "Friday", temp: "27°C", desc: "Windy" }
+      ],
+      Oldport: [
+        { day: "Monday", temp: "18°C", desc: "Foggy" },
+        { day: "Tuesday", temp: "17°C", desc: "Rainy" },
+        { day: "Wednesday", temp: "16°C", desc: "Cloudy" },
+        { day: "Thursday", temp: "19°C", desc: "Windy" },
+        { day: "Friday", temp: "20°C", desc: "Clear" }
+      ]
+    };
+
+    function updateWeather(city) {
+      document.getElementById("city-name").innerText = `City: ${city}`;
+      const forecast = weatherData[city];
+      const forecastContainer = document.getElementById("forecast");
+      forecastContainer.innerHTML = "";
+      forecast.forEach(day => {
+        forecastContainer.innerHTML += `
+          <div class="day">
+            <h3>${day.day}</h3>
+            <p class="temp">${day.temp}</p>
+            <p>${day.desc}</p>
+          </div>
+        `;
+      });
+    }
+
+    // Load default city
+    updateWeather("Sampletown");
+  </script>
+</body>
+</html>
